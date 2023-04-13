@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 # def january(request):
 # return HttpResponse("Exercise daily for at least 30 minutes")
@@ -30,7 +31,10 @@ def monthly_challenge_by_number(request, month):
         return HttpResponseNotFound("Invalid month")
 
     redirect_month = list_months[month-1]
-    return HttpResponseRedirect("/challenges/" + redirect_month)
+    redirect_url = reverse("month-challenge", args=[redirect_month]) # it will create
+    # /challenges/january
+
+    return HttpResponseRedirect(redirect_url)
 
 # any response code that starts with a 3 is called a redirect
 # any response that starts with 2 or 200 is successful
